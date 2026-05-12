@@ -1,0 +1,46 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.notification {
+  position: relative;
+
+  font-size: 22px;
+}
+
+.notification span {
+  width: 18px;
+  height: 18px;
+
+  position: absolute;
+
+  top: -8px;
+  right: -10px;
+
+  border-radius: 50%;
+
+  background: #5f2eea;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 12px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-weight: 600;
+}
