@@ -3,10 +3,10 @@ import { useState } from 'react'
 import './SaqueModal.css'
 
 import { sacar }
-    from '@/services/ContaService'
+    from '../../services/ContaService'
 import toast from 'react-hot-toast'
 
-import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 
 export default function SaqueModal({

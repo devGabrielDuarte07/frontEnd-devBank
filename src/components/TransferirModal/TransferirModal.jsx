@@ -3,10 +3,10 @@ import { useState } from 'react'
 import './TransferirModal.css'
 
 import { transferir }
-    from '@/services/ContaService'
+    from '../../services/ContaService'
 import toast from 'react-hot-toast'
 import ConfirmModal
-    from '@/components/ConfirmModal/ConfirmModal'
+    from '../../components/ConfirmModal/ConfirmModal'
 
 export default function TransferirModal({
     atualizarDados,

@@ -1,7 +1,6 @@
 import './Pix.css'
 
-import Sidebar from '@/components/Sidebar/Sidebar'
-
+import Sidebar from '../../components/Sidebar/Sidebar'
 import {
     FaPix,
     FaKey,
@@ -12,15 +11,15 @@ import { useEffect, useState } from 'react'
 
 import {
     listarChaves
-} from '@/services/pixService'
+} from '../../services/pixService'
 
-import ModalCriarChave from '@/components/Pix/ModalCriarChave/ModalCriarChave'
+import ModalCriarChave from '../../components/Pix/ModalCriarChave/ModalCriarChave'
 
-import PixModal from '@/components/Pix/PixModal/PixModal'
+import PixModal from '../../components/Pix/PixModal/PixModal'
 
-import ListaChavesPix from '@/components/Pix/ListaChavesPix/ListaChavesPix'
+import ListaChavesPix from '../../components/Pix/ListaChavesPix/ListaChavesPix'
 
-import PixCard from '@/components/Pix/PixCard/PixCard'
+import PixCard from '../../components/Pix/PixCard/PixCard'
 
 export default function Pix() {
 

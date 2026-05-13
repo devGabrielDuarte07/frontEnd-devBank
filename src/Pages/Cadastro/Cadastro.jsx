@@ -1,7 +1,7 @@
 import './Cadastro.css'
 
-import logo from '@/assets/imagens/logo-roxa.png'
-import card from '@/assets/imagens/cartaoDevBank.png'
+import logo from '../../assets/imagens/logo-roxa.png'
+import card from '../../assets/imagens/cartaoDevBank.png'
 import { useNavigate } from 'react-router-dom'
 import { FaUser, FaEnvelope, FaLock, FaPhone } from 'react-icons/fa'
 import { MdDateRange } from 'react-icons/md'

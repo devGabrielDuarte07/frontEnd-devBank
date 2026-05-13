@@ -3,10 +3,10 @@ import { useState } from 'react'
 import './PixModal.css'
 
 import { pix }
-    from '@/services/ContaService'
+    from '../../../services/contaService'
 
 import toast from 'react-hot-toast'
-import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
 
 export default function PixModal({
     atualizarDados,

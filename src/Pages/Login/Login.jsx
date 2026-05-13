@@ -1,11 +1,11 @@
 import './Login.css'
 
-import logoBranca from '@/assets/imagens/logo-branca.png'
-import logoRoxa from '@/assets/imagens/logo-roxa.png'
+import logoBranca from '../../assets/imagens/logo-branca.png'
+import logoRoxa from '../../assets/imagens/logo-roxa.png'
 
 import { useState, useEffect } from 'react'
 
-import { login } from '@/services/AuthService'
+import { login } from '../../services/AuthService'
 
 import { useNavigate, Link } from 'react-router-dom'
 

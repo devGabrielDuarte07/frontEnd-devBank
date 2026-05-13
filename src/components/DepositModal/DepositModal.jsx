@@ -2,10 +2,11 @@ import { useState } from 'react'
 import './DepositModal.css'
 
 import { depositar }
-    from '@/services/ContaService'
+    from '../../services/ContaService'
+    
 
 import toast from 'react-hot-toast'
-import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 export default function DepositModal({
     atualizarDados,
     onClose

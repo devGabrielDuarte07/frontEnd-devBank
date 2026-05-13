@@ -1,6 +1,6 @@
 import './Sidebar.css'
 
-import logo from '@/assets/imagens/logo-roxa.png'
+import logo from '../../assets/imagens/logo-roxa.png'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
@@ -16,7 +16,7 @@ import {
 import { SiPix } from 'react-icons/si'
 
 import { MdArrowDownward } from 'react-icons/md'
-import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
 
 
 export default function Sidebar() {

@@ -1,5 +1,5 @@
-import Sidebar from '@/components/Sidebar/Sidebar'
-import EmDesenvolvimento from '@/components/EmDesenvolvimento/EmDesenvolvimento'
+import Sidebar from '../../components/Sidebar/Sidebar'
+import EmDesenvolvimento from '../../components/EmDesenvolvimento/EmDesenvolvimento'
 
 import './Perfil.css'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
-import '@/Styles/global.css'
+import '../src/Styles/global.css'
 
 import AppRoutes from './routes/AppRoutes'
 
