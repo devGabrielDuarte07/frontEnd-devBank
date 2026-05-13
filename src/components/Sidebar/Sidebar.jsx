@@ -1,6 +1,6 @@
 import './Sidebar.css'
 
-import logo from '../../assets/imagens/logo-roxa.png'
+import logo from '../../assets/imagens/logoRoxa.png'
 
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useState } from 'react'

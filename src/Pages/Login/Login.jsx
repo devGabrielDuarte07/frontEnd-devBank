@@ -1,7 +1,7 @@
 import './Login.css'
 
-import logoBranca from '../../assets/imagens/logo-branca.png'
-import logoRoxa from '../../assets/imagens/logo-roxa.png'
+import logoBranca from '../../assets/imagens/LogoBranca.png'
+import logoRoxa from '../../assets/imagens/logoRoxa.png'
 
 import { useState, useEffect } from 'react'
 
