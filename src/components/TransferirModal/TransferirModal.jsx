@@ -3,7 +3,7 @@ import { useState } from 'react'
 import './TransferirModal.css'
 
 import { transferir }
-    from '../../services/ContaService'
+    from '../../services/contaService'
 import toast from 'react-hot-toast'
 import ConfirmModal
     from '../../components/ConfirmModal/ConfirmModal'

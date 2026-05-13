@@ -11,7 +11,7 @@ import { useEffect, useState } from 'react'
 
 import {
     listarChaves
-} from '../../services/pixService'
+} from '../../services/PixService'
 
 import ModalCriarChave from '../../components/Pix/ModalCriarChave/ModalCriarChave'
 

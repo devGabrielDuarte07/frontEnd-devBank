@@ -5,7 +5,7 @@ import logoRoxa from '../../assets/imagens/logoRoxa.png'
 
 import { useState, useEffect } from 'react'
 
-import { login } from '../../services/AuthService'
+import { login } from '../../services/authService'
 
 import { useNavigate, Link } from 'react-router-dom'
 

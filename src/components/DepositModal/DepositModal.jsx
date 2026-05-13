@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './DepositModal.css'
 
 import { depositar }
-    from '../../services/ContaService'
+    from '../../services/contaService'
     
 
 import toast from 'react-hot-toast'
