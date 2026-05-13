@@ -7,9 +7,8 @@
 
     background: var(--color-background);
 
-    overflow: hidden;
+    overflow-x: hidden;
 }
-
 /* ========================= */
 /* LADO ESQUERDO */
 /* ========================= */
@@ -451,6 +450,14 @@
 
 @media (max-width: 768px) {
 
+     body {
+        overflow-y: auto;
+    }
+
+    .register-container {
+        min-height: auto;
+    }
+    
     .container-esquerdo {
 
         display: none;

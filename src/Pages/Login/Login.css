@@ -310,6 +310,38 @@
         0 0 0 4px rgba(123, 44, 191, 0.08);
 }
 
+.password-input {
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+}
+
+.password-input input {
+
+    width: 100%;
+}
+
+.toggle-password {
+
+    position: absolute;
+
+    right: 14px;
+
+    background: transparent;
+    border: none;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: var(--color-text-secondary);
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
 /* ========================= */
 /* OPTIONS */
 /* ========================= */

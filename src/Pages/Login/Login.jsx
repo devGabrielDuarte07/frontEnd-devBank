@@ -11,7 +11,9 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import {
     FaMoon,
-    FaSun
+    FaSun,
+    FaEye,
+    FaEyeSlash
 } from 'react-icons/fa'
 
 export default function Login() {
@@ -20,7 +22,7 @@ export default function Login() {
 
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-
+    const [mostrarSenha, setMostrarSenha] = useState(false)
     const [darkMode, setDarkMode] = useState(
         localStorage.getItem('theme') === 'dark'
     )
@@ -144,15 +146,33 @@ export default function Login() {
                             Senha
                         </label>
 
-                        <input
-                            id="password"
-                            type="password"
-                            placeholder="Digite sua senha"
-                            value={senha}
-                            onChange={e =>
-                                setSenha(e.target.value)
-                            }
-                        />
+                        <div className="password-input">
+
+                            <input
+                                id="password"
+                                type={mostrarSenha ? 'text' : 'password'}
+                                placeholder="Digite sua senha"
+                                value={senha}
+                                onChange={e =>
+                                    setSenha(e.target.value)
+                                }
+                            />
+
+                            <button
+                                type="button"
+                                className="toggle-password"
+                                onClick={() =>
+                                    setMostrarSenha(prev => !prev)
+                                }
+                            >
+                                {
+                                    mostrarSenha
+                                        ? <FaEyeSlash />
+                                        : <FaEye />
+                                }
+                            </button>
+
+                        </div>
 
                     </div>
 
