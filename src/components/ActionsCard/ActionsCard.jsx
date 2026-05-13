@@ -9,7 +9,8 @@ import { SiPix } from 'react-icons/si'
 
 import { MdArrowDownward } from 'react-icons/md'
 
-export default function ActionsCard() {
+export default function ActionsCard({ onOpenDeposit, onOpenSaque, onOpenTransfer, onOpenPix }) {
+
     return (
         <div className="actions-card">
 
@@ -17,22 +18,28 @@ export default function ActionsCard() {
 
             <div className="actions-grid">
 
-                <div className="action-item">
+                <div
+                    className="action-item"
+                    onClick={onOpenDeposit}
+                >
                     <FaMoneyBillWave />
                     <span>Depositar</span>
                 </div>
 
-                <div className="action-item">
+                <div 
+                    className="action-item"
+                    onClick={onOpenSaque}
+                >
                     <MdArrowDownward />
                     <span>Sacar</span>
                 </div>
 
-                <div className="action-item">
+                <div className="action-item" onClick={onOpenTransfer}>
                     <FaExchangeAlt />
                     <span>Transferir</span>
                 </div>
 
-                <div className="action-item">
+                <div className="action-item" onClick={onOpenPix}>
                     <SiPix />
                     <span>Pix</span>
                 </div>

@@ -1,0 +1,10 @@
+.saque-container{
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f6fa;
+}
+
+.saque-content{
+    flex: 1;
+    padding: 30px;
+}

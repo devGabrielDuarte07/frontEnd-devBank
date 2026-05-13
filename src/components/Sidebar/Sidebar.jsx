@@ -2,6 +2,8 @@ import './Sidebar.css'
 
 import logo from '@/assets/imagens/logo-roxa.png'
 
+import { NavLink, useNavigate } from 'react-router-dom'
+
 import {
     FaHome,
     FaFileInvoiceDollar,
@@ -16,7 +18,18 @@ import { SiPix } from 'react-icons/si'
 import { MdArrowDownward } from 'react-icons/md'
 
 export default function Sidebar() {
+
+    const navigate = useNavigate()
+
+    function sair() {
+
+        localStorage.removeItem('token')
+
+        navigate('/login')
+    }
+
     return (
+
         <aside className="sidebar">
 
             <div>
@@ -28,48 +41,88 @@ export default function Sidebar() {
 
                 <nav className="sidebar-menu">
 
-                    <a className="active">
+                    <NavLink
+                        to="/dashboard"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <FaHome />
                         Início
-                    </a>
+                    </NavLink>
 
-                    <a>
+                    <NavLink
+                        to="/extrato"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <FaFileInvoiceDollar />
                         Extrato
-                    </a>
+                    </NavLink>
 
-                    <a>
+                    <NavLink
+                        to="/deposito"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <FaMoneyBillWave />
                         Depósito
-                    </a>
+                    </NavLink>
 
-                    <a>
+                    <NavLink
+                        to="/saque"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <MdArrowDownward />
                         Saque
-                    </a>
+                    </NavLink>
 
-                    <a>
+                    <NavLink
+                        to="/transferencia"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <FaExchangeAlt />
                         Transferência
-                    </a>
+                    </NavLink>
 
-                    <a>
+                    <NavLink
+                        to="/pix"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <SiPix />
                         Pix
-                    </a>
+                    </NavLink>
 
-                    <a>
+                    <NavLink
+                        to="/perfil"
+                        className={({ isActive }) =>
+                            isActive ? 'active' : ''
+                        }
+                    >
                         <FaUser />
                         Perfil
-                    </a>
+                    </NavLink>
 
                 </nav>
 
             </div>
 
-            <button className="logout-btn">
+            <button
+                className="logout-btn"
+                onClick={sair}
+            >
                 <FaSignOutAlt />
                 Sair
             </button>
-    </aside>
-)}
+
+        </aside>
+    )
+}

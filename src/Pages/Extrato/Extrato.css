@@ -1,0 +1,10 @@
+.extrato-container{
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f6fa;
+}
+
+.extrato-content{
+    flex: 1;
+    padding: 30px;
+}

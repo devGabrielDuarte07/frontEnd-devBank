@@ -72,3 +72,13 @@
 
   cursor: pointer;
 }
+
+.sidebar-menu a.active {
+    background: #6c63ff;
+    color: white;
+}
+
+.sidebar-menu a {
+    text-decoration: none;
+    color: inherit;
+}

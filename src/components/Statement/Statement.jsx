@@ -1,35 +1,123 @@
 import './Statement.css'
 
+import {
+    FaMoneyBillWave,
+    FaExchangeAlt,
+    FaArrowDown,
+    FaArrowUp
+} from 'react-icons/fa'
+
 import { SiPix } from 'react-icons/si'
 
-export default function Statement() {
+const tiposTransacao = {
+
+    P: {
+        texto: 'Pix',
+        icon: <SiPix />
+    },
+
+    D: {
+        texto: 'Depósito',
+        icon: <FaArrowDown />
+    },
+
+    S: {
+        texto: 'Saque',
+        icon: <FaArrowUp />
+    },
+
+    T: {
+        texto: 'Transferência',
+        icon: <FaExchangeAlt />
+    },
+
+    DEFAULT: {
+        texto: 'Movimentação',
+        icon: <FaMoneyBillWave />
+    }
+}
+
+export default function Statement({
+    transacoes
+}) {
+
     return (
-        <section className="statement">
 
-            <h3>Extrato</h3>
+        <div className="statement">
 
-            <div className="transaction">
+            <h2>Extrato</h2>
 
-                <div className="transaction-left">
-                    <SiPix />
-                    <span>Pix recebido</span>
-                </div>
+            {
+                transacoes?.map(
+                    (transacao, index) => {
 
-                <strong>+ R$ 500,00</strong>
+                    const tipoInfo =
+                        tiposTransacao[
+                            transacao.tipo
+                        ] || tiposTransacao.DEFAULT
 
-            </div>
+                    return (
 
-            <div className="transaction">
+                        <div
+                            className="transaction"
+                            key={index}
+                        >
 
-                <div className="transaction-left">
-                    <SiPix />
-                    <span>Pix recebido</span>
-                </div>
+                            <div
+                                className="transaction-left"
+                            >
 
-                <strong>+ R$ 500,00</strong>
+                                <div className="icon">
 
-            </div>
+                                    {tipoInfo.icon}
 
-        </section>
+                                </div>
+
+                                <div>
+
+                                    <h3>
+                                        {tipoInfo.texto}
+                                    </h3>
+
+                                    <p>
+                                        {
+                                            new Date(
+                                                transacao.data
+                                            ).toLocaleDateString(
+                                                'pt-BR'
+                                            )
+                                        }
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <span
+                                className={
+                                    transacao.direcao ===
+                                    'Entrada'
+                                        ? 'entrada'
+                                        : 'saida'
+                                }
+                            >
+
+                                {
+                                    transacao.direcao ===
+                                    'Entrada'
+                                        ? '+'
+                                        : '-'
+                                }
+
+                                R$ {transacao.valor}
+
+                            </span>
+
+                        </div>
+                    )
+                })
+            }
+
+        </div>
     )
 }

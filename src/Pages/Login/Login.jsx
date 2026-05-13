@@ -1,8 +1,31 @@
 import './Login.css'
 import logoBranca from '@/assets/imagens/logo-branca.png'
 import logoRoxa from '@/assets/imagens/logo-roxa.png'
+import { useState } from 'react'
+import { login } from '@/services/AuthService'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+
+    const navigate = useNavigate()
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+
+    async function fazerLogin() {
+        try {
+
+            const data = await login(email, senha)
+            console.log('Token recebido:', data)
+            localStorage.setItem('token', data.token)
+            
+            navigate('/dashboard')
+
+        }
+        catch (error) {
+            console.error('Erro ao fazer login:', error.response.data)
+        }
+    }
+
     return (
         <div className="login-container">
 
@@ -37,6 +60,8 @@ export default function Login() {
                         <label htmlFor="email">Email</label>
 
                         <input
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                             id="email"
                             type="email"
                             placeholder="Digite seu e-mail"
@@ -47,6 +72,8 @@ export default function Login() {
                         <label htmlFor="password">Senha</label>
 
                         <input
+                            value={senha}
+                            onChange={e => setSenha(e.target.value)}
                             id="password"
                             type="password"
                             placeholder="Digite sua senha"
@@ -64,7 +91,7 @@ export default function Login() {
 
                     </div>
 
-                    <button>Entrar</button>
+                    <button onClick={fazerLogin}>Entrar</button>
 
                     <div className="divider">
 

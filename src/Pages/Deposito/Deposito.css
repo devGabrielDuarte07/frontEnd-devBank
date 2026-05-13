@@ -1,0 +1,10 @@
+.deposito-container{
+    display: flex;
+    min-height: 100vh;
+    background-color: #f5f6fa;
+}
+
+.deposito-content{
+    flex: 1;
+    padding: 30px;
+}
