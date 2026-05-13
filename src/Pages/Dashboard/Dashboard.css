@@ -5,19 +5,28 @@
   display: flex;
 
   background: #f4f6fb;
+
+  overflow: hidden;
 }
 
 .main-content {
   flex: 1;
+
+  height: 100vh;
 
   padding: 30px;
 
   display: flex;
   flex-direction: column;
   gap: 30px;
+
+  overflow: hidden;
+  min-height: 0;
 }
 
 .top-area {
   display: flex;
   gap: 25px;
+
+  min-height: 0;
 }

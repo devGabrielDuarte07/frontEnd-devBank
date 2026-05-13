@@ -4,12 +4,16 @@ import './TransferirModal.css'
 
 import { transferir }
     from '@/services/ContaService'
+import toast from 'react-hot-toast'
+import ConfirmModal
+    from '@/components/ConfirmModal/ConfirmModal'
 
 export default function TransferirModal({
     atualizarDados,
     onClose
 }) {
-
+    const [confirmar, setConfirmar] =
+        useState(false)
     const [cpfContaDestino, setCpfContaDestino] =
         useState('')
 
@@ -18,6 +22,14 @@ export default function TransferirModal({
 
     async function fazerTransferencia() {
 
+        if (!cpfContaDestino || !valor) {
+            return toast.error('Preencha todos os campos')
+        }
+
+        if (Number(valor) <= 0) {
+            return toast.error('Valor inválido')
+        }
+
         try {
 
             await transferir(
@@ -25,12 +37,14 @@ export default function TransferirModal({
                 Number(valor)
             )
 
-            alert('Transferência realizada')
+            toast.success('Transferência realizada')
 
             atualizarDados()
 
             setCpfContaDestino('')
             setValor('')
+
+            setConfirmar(false)
 
             onClose()
 
@@ -38,7 +52,7 @@ export default function TransferirModal({
 
             console.error(error)
 
-            alert('Erro ao transferir', error.response.data)
+            toast.error(error.response?.data?.mensagem || "Erro ao realizar transferência")
         }
     }
 
@@ -74,11 +88,42 @@ export default function TransferirModal({
             />
 
             <button
-                onClick={fazerTransferencia}
+                onClick={() => setConfirmar(true)}
             >
                 Confirmar transferência
             </button>
+            {
+                confirmar && (
 
+                    <ConfirmModal
+
+                        titulo="Confirmar transferência"
+
+                        descricao={
+                            `Deseja transferir
+                                ${Number(valor).toLocaleString(
+                                'pt-BR',
+                                {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }
+                            )}
+                                para o CPF
+                                ${cpfContaDestino}?`
+                        }
+
+                        variant="sucess"
+                        
+                        onConfirm={fazerTransferencia}
+
+                        onClose={() =>
+                            setConfirmar(false)
+                        }
+
+                    />
+
+                )
+            }
         </div>
     )
 }

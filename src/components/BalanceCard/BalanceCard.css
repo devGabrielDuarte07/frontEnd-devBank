@@ -20,6 +20,15 @@
   color: white;
 }
 
+.balance-card p{
+  font-size: 40px;
+}
+
+.balance-card h2{
+  font-size: 30px;
+}
+
+
 .balance-info {
   display: flex;
   flex-direction: column;

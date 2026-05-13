@@ -103,7 +103,7 @@ export default function Login() {
 
                     </div>
 
-                    <button className="register-btn">
+                    <button className="register-btn" onClick={() => navigate("/cadastro")}>
                         Cadastrar nova conta
                     </button>
                 </div>

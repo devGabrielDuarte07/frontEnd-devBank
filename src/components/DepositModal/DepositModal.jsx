@@ -4,11 +4,14 @@ import './DepositModal.css'
 import { depositar }
     from '@/services/ContaService'
 
+import toast from 'react-hot-toast'
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
 export default function DepositModal({
     atualizarDados,
     onClose
 }) {
-
+    const [confirmar, setConfirmar] =
+        useState(false)
     const [valor, setValor] =
         useState('')
 
@@ -20,7 +23,8 @@ export default function DepositModal({
                 Number(valor)
             )
 
-            alert('Depósito realizado')
+
+            toast.success('Depósito realizado')
 
             atualizarDados()
 
@@ -32,7 +36,7 @@ export default function DepositModal({
 
             console.error(error)
 
-            alert('Erro ao depositar')
+            toast.error(error.response?.data?.mensagem || 'Erro ao depositar')
         }
     }
 
@@ -59,11 +63,38 @@ export default function DepositModal({
             />
 
             <button
-                onClick={fazerDeposito}
+                onClick={() => setConfirmar(true)}
             >
                 Confirmar depósito
             </button>
+            {
+                confirmar && (
 
+                    <ConfirmModal
+
+                        titulo="Confirmar depósito"
+
+                        descricao={
+                            `Deseja depositar
+                                ${Number(valor).toLocaleString(
+                                'pt-BR',
+                                {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }
+                            )}?`
+                        }
+
+                        onConfirm={fazerDeposito}
+
+                        onClose={() =>
+                            setConfirmar(false)
+                        }
+
+                    />
+
+                )
+            }
         </div>
     )
 }

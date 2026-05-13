@@ -5,11 +5,15 @@ import './PixModal.css'
 import { pix }
     from '@/services/ContaService'
 
+import toast from 'react-hot-toast'
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+
 export default function PixModal({
     atualizarDados,
     onClose
 }) {
-
+    const [confirmar, setConfirmar] =
+        useState(false)
     const [chave, setChave] = useState('')
 
     const [valor, setValor] = useState('')
@@ -23,20 +27,20 @@ export default function PixModal({
                 Number(valor)
             )
 
-            alert('Pix realizado')
+            toast.success('Pix realizado')
 
             atualizarDados()
 
             setChave('')
             setValor('')
-
+            setConfirmar(false)
             onClose()
 
         } catch (error) {
 
             console.error(error)
 
-            alert('Erro ao realizar Pix')
+            toast.error(error.response?.data?.mensagem)
         }
     }
 
@@ -72,11 +76,40 @@ export default function PixModal({
             />
 
             <button
-                onClick={fazerPix}
+                onClick={() => setConfirmar(true)}
             >
                 Confirmar Pix
             </button>
+            {
+                confirmar && (
 
+                    <ConfirmModal
+
+                        titulo="Confirmar Pix"
+
+                        descricao={
+                            `Deseja enviar
+                ${Number(valor).toLocaleString(
+                                'pt-BR',
+                                {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }
+                            )}
+                para a chave
+                ${chave}?`
+                        }
+                        variant = 'primary'
+                        onConfirm={fazerPix}
+
+                        onClose={() =>
+                            setConfirmar(false)
+                        }
+
+                    />
+
+                )
+            }
         </div>
     )
 }

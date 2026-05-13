@@ -2,12 +2,14 @@ import './Cadastro.css'
 
 import logo from '@/assets/imagens/logo-roxa.png'
 import card from '@/assets/imagens/cartaoDevBank.png'
-
+import { useNavigate } from 'react-router-dom'
 import { FaUser, FaEnvelope, FaLock, FaPhone } from 'react-icons/fa'
 import { MdDateRange } from 'react-icons/md'
 
 export default function Register() {
+    const navigate = useNavigate()
     return (
+        
         <div className="register-container">
 
             {/* LADO ESQUERDO */}
@@ -217,7 +219,7 @@ export default function Register() {
 
                     {/* LOGIN */}
 
-                    <button className="login-btn">
+                    <button className="login-btn" onClick={()=> navigate("/")}>
                         Já tenho uma conta?
                         <span> Entrar</span>
                     </button>

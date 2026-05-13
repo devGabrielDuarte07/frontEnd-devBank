@@ -4,11 +4,18 @@ import './SaqueModal.css'
 
 import { sacar }
     from '@/services/ContaService'
+import toast from 'react-hot-toast'
+
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+
 
 export default function SaqueModal({
     atualizarDados,
     onClose
 }) {
+
+    const [confirmar, setConfirmar] =
+        useState(false)
 
     const [valor, setValor] =
         useState('')
@@ -21,7 +28,7 @@ export default function SaqueModal({
                 Number(valor)
             )
 
-            alert('Saque realizado')
+            toast.success('Saque realizado')
 
             atualizarDados()
 
@@ -33,7 +40,7 @@ export default function SaqueModal({
 
             console.error(error)
 
-            alert('Erro ao sacar')
+            toast.error(error.response?.data?.mensagem)
         }
     }
 
@@ -60,11 +67,38 @@ export default function SaqueModal({
             />
 
             <button
-                onClick={fazerSaque}
+                onClick={() => setConfirmar(true)}
             >
                 Confirmar saque
             </button>
+            {
+                confirmar && (
 
+                    <ConfirmModal
+
+                        titulo="Confirmar saque"
+
+                        descricao={
+                            `Deseja sacar
+                                ${Number(valor).toLocaleString(
+                                'pt-BR',
+                                {
+                                    style: 'currency',
+                                    currency: 'BRL'
+                                }
+                            )}?`
+                        }
+
+                        onConfirm={fazerSaque}
+
+                        onClose={() =>
+                            setConfirmar(false)
+                        }
+
+                    />
+
+                )
+            }
         </div>
     )
 }

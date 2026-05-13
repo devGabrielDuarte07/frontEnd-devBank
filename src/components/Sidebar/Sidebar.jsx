@@ -3,7 +3,7 @@ import './Sidebar.css'
 import logo from '@/assets/imagens/logo-roxa.png'
 
 import { NavLink, useNavigate } from 'react-router-dom'
-
+import { useState } from 'react'
 import {
     FaHome,
     FaFileInvoiceDollar,
@@ -16,9 +16,12 @@ import {
 import { SiPix } from 'react-icons/si'
 
 import { MdArrowDownward } from 'react-icons/md'
+import ConfirmModal from '@/components/ConfirmModal/ConfirmModal'
+
 
 export default function Sidebar() {
-
+    const [confirmar, setConfirmar] =
+        useState(false)
     const navigate = useNavigate()
 
     function sair() {
@@ -117,12 +120,34 @@ export default function Sidebar() {
 
             <button
                 className="logout-btn"
-                onClick={sair}
+                onClick={() => setConfirmar(true)}
             >
                 <FaSignOutAlt />
                 Sair
             </button>
+            {
+                confirmar && (
 
+                    <ConfirmModal
+
+                        titulo="Sair da conta"
+
+                        descricao={
+                            'Deseja realmente sair da sua conta?'
+                        }
+
+                        variant="danger"
+                        
+                        onConfirm={sair}
+
+                        onClose={() =>
+                            setConfirmar(false)
+                        }
+
+                    />
+
+                )
+            }
         </aside>
     )
 }

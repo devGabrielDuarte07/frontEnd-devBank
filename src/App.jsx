@@ -1,6 +1,6 @@
-import Login from './pages/Login/Login'
-import Cadastro from './Pages/Cadastro/Cadastro'
-import Dashboard from './Pages/Dashboard/Dashboard'
+import Login from '@/src/Pages/Login/Login'
+import styles from '../src/Styles/global'
+
 export default function App() {
   
   return <Login />
