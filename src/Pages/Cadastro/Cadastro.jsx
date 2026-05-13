@@ -4,7 +4,7 @@ import logo from '../../assets/imagens/logoRoxa.png'
 import card from '../../assets/imagens/cartaoDevBank.png'
 
 import { useNavigate } from 'react-router-dom'
-
+import toast from 'react-hot-toast'
 import {
     FaUser,
     FaEnvelope,
@@ -32,6 +32,7 @@ export default function Register() {
     const [confirmarSenha, setConfirmarSenha] = useState('')
 
     const [mostrarSenha, setMostrarSenha] = useState(false)
+    const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false)
 
     async function cadastrar() {
 
@@ -39,10 +40,16 @@ export default function Register() {
 
             if (senha !== confirmarSenha) {
 
-                alert('As senhas não coincidem')
+                toast.error('As senhas não coincidem')
                 return
             }
-
+            console.log({
+                nome,
+                cpf,
+                email,
+                telefone,
+                senha
+            })
             await criarUsuario({
 
                 nome,
@@ -52,15 +59,15 @@ export default function Register() {
                 senha
             })
 
-            alert('Conta criada com sucesso')
+            toast.success('Conta criada com sucesso')
 
             navigate('/')
 
         } catch (error) {
 
-            console.error(error)
+            console.error(error.response?.data)
 
-            alert(
+            toast.error(
                 error.response?.data?.mensagem ||
                 'Erro ao criar conta'
             )
@@ -269,7 +276,7 @@ export default function Register() {
 
                             <input
                                 type={
-                                    mostrarSenha
+                                    mostrarConfirmarSenha
                                         ? 'text'
                                         : 'password'
                                 }
@@ -281,27 +288,24 @@ export default function Register() {
                                     )
                                 }
                             />
-
+                            <button
+                                type="button"
+                                className="toggle-password"
+                                onClick={() =>
+                                    setMostrarConfirmarSenha(prev => !prev)
+                                }
+                            >
+                                {
+                                    mostrarConfirmarSenha
+                                        ? <FaEyeSlash />
+                                        : <FaEye />
+                                }
+                            </button>
                         </div>
 
                     </div>
 
-                    {/* TERMOS */}
 
-                    <div className="terms">
-
-                        <label>
-
-                            <input type="checkbox" />
-
-                            Li e aceito os
-                            <span> Termos de Uso </span>
-                            e a
-                            <span> Política de Privacidade</span>
-
-                        </label>
-
-                    </div>
 
                     {/* BOTÃO */}
 
