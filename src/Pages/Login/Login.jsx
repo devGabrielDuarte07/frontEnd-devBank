@@ -1,32 +1,73 @@
 import './Login.css'
+
 import logoBranca from '@/assets/imagens/logo-branca.png'
 import logoRoxa from '@/assets/imagens/logo-roxa.png'
-import { useState } from 'react'
+
+import { useState, useEffect } from 'react'
+
 import { login } from '@/services/AuthService'
-import { useNavigate } from 'react-router-dom'
+
+import { useNavigate, Link } from 'react-router-dom'
+
+import {
+    FaMoon,
+    FaSun
+} from 'react-icons/fa'
 
 export default function Login() {
 
     const navigate = useNavigate()
+
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
+    const [darkMode, setDarkMode] = useState(
+        localStorage.getItem('theme') === 'dark'
+    )
+
+    useEffect(() => {
+
+        if (darkMode) {
+
+            document.body.classList.add('dark')
+
+            localStorage.setItem('theme', 'dark')
+
+        } else {
+
+            document.body.classList.remove('dark')
+
+            localStorage.setItem('theme', 'light')
+        }
+
+    }, [darkMode])
+
+    function toggleTheme() {
+
+        setDarkMode(prev => !prev)
+    }
+
     async function fazerLogin() {
+
         try {
 
             const data = await login(email, senha)
-            console.log('Token recebido:', data)
+
             localStorage.setItem('token', data.token)
-            
+
             navigate('/dashboard')
 
-        }
-        catch (error) {
-            console.error('Erro ao fazer login:', error.response.data)
+        } catch (error) {
+
+            console.error(
+                'Erro ao fazer login:',
+                error.response?.data || error.message
+            )
         }
     }
 
     return (
+
         <div className="login-container">
 
             <div className="container-esquerdo">
@@ -34,8 +75,14 @@ export default function Login() {
                 <div className="left-content">
 
                     <div className="logo">
-                        <img src={logoBranca} alt="logo" />
+
+                        <img
+                            src={logoBranca}
+                            alt="logo"
+                        />
+
                         <h1>DevBank</h1>
+
                     </div>
 
                     <p>
@@ -51,61 +98,109 @@ export default function Login() {
 
                 <div className="login-box">
 
+                    <button
+                        className="theme-toggle"
+                        onClick={toggleTheme}
+                    >
+                        {
+                            darkMode
+                                ? <FaSun />
+                                : <FaMoon />
+                        }
+                    </button>
+
                     <div className="login-header">
-                        <img src={logoRoxa} alt="logo" />
+
+                        <img
+                            src={logoRoxa}
+                            alt="logo"
+                        />
+
                         <h1>Acesse sua conta</h1>
+
                     </div>
 
                     <div className="input-group">
-                        <label htmlFor="email">Email</label>
+
+                        <label htmlFor="email">
+                            Email
+                        </label>
 
                         <input
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
                             id="email"
                             type="email"
                             placeholder="Digite seu e-mail"
+                            value={email}
+                            onChange={e =>
+                                setEmail(e.target.value)
+                            }
                         />
+
                     </div>
 
                     <div className="input-group">
-                        <label htmlFor="password">Senha</label>
+
+                        <label htmlFor="password">
+                            Senha
+                        </label>
 
                         <input
-                            value={senha}
-                            onChange={e => setSenha(e.target.value)}
                             id="password"
                             type="password"
                             placeholder="Digite sua senha"
+                            value={senha}
+                            onChange={e =>
+                                setSenha(e.target.value)
+                            }
                         />
+
                     </div>
 
                     <div className="login-options">
 
                         <label className="remember-me">
+
                             <input type="checkbox" />
+
                             Lembrar de mim
+
                         </label>
 
-                        <a href="#">Esqueci minha senha</a>
+                        <Link to="/recuperar-senha">
+
+                            Esqueci minha senha
+
+                        </Link>
 
                     </div>
 
-                    <button onClick={fazerLogin}>Entrar</button>
+                    <button onClick={fazerLogin} className="login-submit">
+
+                        Entrar
+
+                    </button>
 
                     <div className="divider">
 
                         <div className="line"></div>
 
-                        <span>ou continue com</span>
+                        <span>
+                            ou continue com
+                        </span>
 
                         <div className="line"></div>
 
                     </div>
 
-                    <button className="register-btn" onClick={() => navigate("/cadastro")}>
+                    <button
+                        className="register-btn"
+                        onClick={() =>
+                            navigate('/cadastro')
+                        }
+                    >
                         Cadastrar nova conta
                     </button>
+
                 </div>
 
             </div>

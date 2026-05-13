@@ -1,91 +1,283 @@
 .statement-container {
-    background: #fff;
-    border-radius: 20px;
 
-    padding: 30px;
+    flex: 1;
+
+    min-height: 0;
+
+    background: var(--color-surface);
+
+    padding: 32px;
+
+    border-radius: var(--radius-lg);
+
+    border: 1px solid var(--color-border-light);
+
+    box-shadow: var(--shadow-md);
 
     display: flex;
     flex-direction: column;
 
-    flex: 1;
-
-    min-height: 0;
+    overflow: hidden;
 }
 
 .statement-container h2 {
-    margin-bottom: 25px;
+
+    margin-bottom: 28px;
+
     flex-shrink: 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: var(--color-text);
+
+    line-height: 1.1;
 }
+
 .statement-list {
+
     flex: 1;
+
     min-height: 0;
 
     overflow-y: auto;
+
+    padding-right: 6px;
 }
+
 .statement-list::-webkit-scrollbar {
+
     width: 6px;
 }
 
 .statement-list::-webkit-scrollbar-thumb {
-    background: #c5c5c5;
-    border-radius: 10px;
+
+    background: var(--color-border);
+
+    border-radius: 999px;
 }
 
 .transaction {
+
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    margin-top: 20px;
+    gap: 20px;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    border: 1px solid transparent;
+
+    transition: var(--transition);
+
+    margin-bottom: 12px;
+}
+
+.transaction:hover {
+
+    background: var(--color-surface-hover);
+
+    border-color: var(--color-border-light);
+
+    transform: translateY(-1px);
+}
+
+.transaction:last-child {
+
+    margin-bottom: 0;
 }
 
 .transaction-left {
+
     display: flex;
     align-items: center;
+
     gap: 16px;
+
+    min-width: 0;
+}
+
+.transaction-left div {
+
+    min-width: 0;
+}
+
+.transaction-left h3 {
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: var(--color-text);
+
+    margin-bottom: 4px;
 }
 
 .icon {
-    width: 45px;
-    height: 45px;
 
-    background: #f3f3f3;
+    width: 48px;
+    height: 48px;
 
-    border-radius: 12px;
+    background: var(--color-background);
+
+    border-radius: 14px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
     font-size: 20px;
+
+    flex-shrink: 0;
 }
 
 .entrada {
-    color: #00c853;
-    font-weight: bold;
+
+    color: var(--color-success);
+
+    font-weight: 700;
 }
 
 .saida {
-    color: #ff5252;
-    font-weight: bold;
+
+    color: var(--color-danger);
+
+    font-weight: 700;
 }
 
 .transaction-right {
+
     display: flex;
     flex-direction: column;
+
     align-items: flex-end;
 
-    gap: 4px;
+    gap: 5px;
+
+    flex-shrink: 0;
 }
 
 .transaction-date {
+
     font-size: 12px;
-    color: #888;
+    font-weight: 500;
+
+    color: var(--color-text-secondary);
 }
 
 .transaction-person {
-    font-size: 13px;
-    color: #888;
 
-    margin-top: 2px;
+    font-size: 13px;
+
+    color: var(--color-text-secondary);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    max-width: 180px;
+}
+
+@media (max-width: 768px) {
+
+    .statement-container {
+
+        padding: 24px;
+
+        border-radius: 20px;
+
+        min-height: 500px;
+
+        flex: none;
+    }
+
+    .statement-container h2 {
+
+        font-size: 24px;
+
+        margin-bottom: 22px;
+    }
+
+    .statement-list {
+
+        overflow: visible;
+    }
+
+    .transaction {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 14px;
+    }
+
+    .transaction-right {
+
+        width: 100%;
+
+        flex-direction: row;
+
+        justify-content: space-between;
+
+        align-items: center;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .statement-container {
+
+        padding: 20px;
+
+        border-radius: 18px;
+    }
+
+    .statement-container h2 {
+
+        font-size: 22px;
+    }
+
+    .transaction {
+
+        padding: 16px;
+
+        gap: 12px;
+    }
+
+    .transaction-left {
+
+        gap: 12px;
+    }
+
+    .icon {
+
+        width: 42px;
+        height: 42px;
+
+        font-size: 18px;
+
+        border-radius: 12px;
+    }
+
+    .transaction-left h3 {
+
+        font-size: 15px;
+    }
+
+    .transaction-person {
+
+        font-size: 12px;
+
+        max-width: 120px;
+    }
+
+    .transaction-date {
+
+        font-size: 11px;
+    }
+
 }

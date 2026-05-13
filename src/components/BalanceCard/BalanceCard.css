@@ -1,41 +1,219 @@
 .balance-card {
-  flex: 1;
 
-  min-height: 220px;
+    flex: 1;
 
-  background: linear-gradient(
-    135deg,
-    #7b4dff 0%,
-    #5f2eea 100%
-  );
+    min-height: 240px;
 
-  border-radius: 24px;
+    background:
+        linear-gradient(
+            135deg,
+            var(--color-primary) 0%,
+            var(--color-primary-dark) 100%
+        );
 
-  padding: 30px;
+    border-radius: var(--radius-lg);
 
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    padding: 34px;
 
-  color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    color: var(--color-white);
+
+    overflow: hidden;
+
+    position: relative;
+
+    box-shadow: var(--shadow-lg);
+
+    isolation: isolate;
 }
 
-.balance-card p{
-  font-size: 40px;
-}
+.balance-card::before {
 
-.balance-card h2{
-  font-size: 30px;
-}
+    content: "";
 
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,255,255,0.12) 0%,
+            transparent 70%
+        );
+
+    top: -120px;
+    right: -100px;
+
+    z-index: 0;
+}
 
 .balance-info {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 18px;
+
+    z-index: 1;
+}
+
+.balance-info span {
+
+    font-size: 15px;
+    font-weight: 500;
+
+    opacity: 0.8;
+
+    letter-spacing: 0.3px;
+}
+
+.balance-card h2 {
+
+    font-size: 34px;
+    font-weight: 700;
+
+    line-height: 1.1;
+}
+
+.balance-card p {
+
+    font-size: 44px;
+
+    font-weight: 800;
+
+    letter-spacing: -1px;
 }
 
 .bank-icon {
-  font-size: 140px;
-  opacity: 0.2;
+
+    font-size: 140px;
+
+    opacity: 0.12;
+
+    flex-shrink: 0;
+
+    z-index: 0;
+}
+
+@media (max-width: 1024px) {
+
+    .balance-card {
+
+        width: 100%;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .balance-card {
+
+        min-height: 210px;
+
+        padding: 26px;
+
+        border-radius: 20px;
+    }
+
+    .balance-card h2 {
+
+        font-size: 28px;
+    }
+
+    .balance-card p {
+
+        font-size: 38px;
+    }
+
+    .bank-icon {
+
+        font-size: 105px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .balance-card {
+
+        min-height: 190px;
+
+        padding: 22px;
+    }
+
+    .balance-info {
+
+        gap: 14px;
+    }
+
+    .balance-card h2 {
+
+        font-size: 24px;
+    }
+
+    .balance-card p {
+
+        font-size: 32px;
+    }
+
+    .bank-icon {
+
+        position: absolute;
+
+        right: -10px;
+        bottom: -10px;
+
+        font-size: 115px;
+
+        opacity: 0.1;
+    }
+
+}
+
+.balance-value {
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+}
+
+.toggle-balance {
+
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.12);
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: var(--transition);
+
+    backdrop-filter: blur(8px);
+
+    flex-shrink: 0;
+}
+
+.toggle-balance:hover {
+
+    background: rgba(255,255,255,0.18);
+
+    transform: translateY(-2px);
 }

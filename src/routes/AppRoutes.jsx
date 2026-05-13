@@ -9,6 +9,7 @@ import Extrato from '@/pages/Extrato/Extrato'
 import Perfil from '@/pages/Perfil/Perfil'
 import Saque from '@/pages/Saque/Saque'
 import Transferencia from '@/pages/Transferencia/Transferencia'
+import EsqueciSenha from '@/pages/EsqueciSenha/EsqueciSenha'
 
 import PrivateRoute from './PrivateRoute'
 
@@ -96,6 +97,11 @@ export default function AppRoutes() {
                             <Transferencia />
                         </PrivateRoute>
                     }
+                />
+
+                <Route
+                    path="/recuperar-senha"
+                    element={<EsqueciSenha />}
                 />
             </Routes>
 

@@ -76,7 +76,7 @@ export default function Pix() {
 
                         <span>Saldo disponível</span>
 
-                        <h2>R$ 12.450,00</h2>
+                        <h2>****</h2>
 
                     </div>
 

@@ -1,10 +1,53 @@
-.perfil-container{
+.perfil-container {
+
     display: flex;
+
     min-height: 100vh;
-    background-color: #f5f6fa;
+
+    background: var(--color-background);
+
+    overflow: hidden;
 }
 
-.perfil-content{
+.perfil-content {
+
     flex: 1;
-    padding: 30px;
+
+    padding: 32px;
+
+    background: var(--color-background);
+
+    overflow-y: auto;
+}
+
+.perfil-content::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+.perfil-content::-webkit-scrollbar-thumb {
+
+    background: var(--color-border);
+
+    border-radius: 999px;
+}
+
+@media (max-width: 768px) {
+
+    .perfil-content {
+
+        padding:
+            84px 18px 24px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .perfil-content {
+
+        padding:
+            76px 14px 18px;
+    }
+
 }

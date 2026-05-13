@@ -1,9 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
+import '@/Styles/global.css'
+
 import AppRoutes from './routes/AppRoutes'
 
 import { Toaster } from 'react-hot-toast'
+
 ReactDOM.createRoot(
     document.getElementById('root')
 ).render(
@@ -34,7 +37,8 @@ ReactDOM.createRoot(
                 success: {
 
                     style: {
-                        border: '2px solid #00c853'
+                        border:
+                            '2px solid #00c853'
                     },
 
                     iconTheme: {
@@ -46,7 +50,8 @@ ReactDOM.createRoot(
                 error: {
 
                     style: {
-                        border: '2px solid #ff5252'
+                        border:
+                            '2px solid #ff5252'
                     },
 
                     iconTheme: {

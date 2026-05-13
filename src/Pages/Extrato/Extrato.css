@@ -1,10 +1,53 @@
-.extrato-container{
+.extrato-container {
+
     display: flex;
+
     min-height: 100vh;
-    background-color: #f5f6fa;
+
+    background: var(--color-background);
+
+    overflow: hidden;
 }
 
-.extrato-content{
+.extrato-content {
+
     flex: 1;
-    padding: 30px;
+
+    padding: 32px;
+
+    background: var(--color-background);
+
+    overflow-y: auto;
+}
+
+.extrato-content::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+.extrato-content::-webkit-scrollbar-thumb {
+
+    background: var(--color-border);
+
+    border-radius: 999px;
+}
+
+@media (max-width: 768px) {
+
+    .extrato-content {
+
+        padding:
+            84px 18px 24px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .extrato-content {
+
+        padding:
+            76px 14px 18px;
+    }
+
 }

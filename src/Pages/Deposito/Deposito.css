@@ -1,10 +1,53 @@
-.deposito-container{
+.deposito-container {
+
     display: flex;
+
     min-height: 100vh;
-    background-color: #f5f6fa;
+
+    background: var(--color-background);
+
+    overflow: hidden;
 }
 
-.deposito-content{
+.deposito-content {
+
     flex: 1;
-    padding: 30px;
+
+    padding: 32px;
+
+    background: var(--color-background);
+
+    overflow-y: auto;
+}
+
+.deposito-content::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+.deposito-content::-webkit-scrollbar-thumb {
+
+    background: var(--color-border);
+
+    border-radius: 999px;
+}
+
+@media (max-width: 768px) {
+
+    .deposito-content {
+
+        padding:
+            84px 18px 24px;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .deposito-content {
+
+        padding:
+            76px 14px 18px;
+    }
+
 }

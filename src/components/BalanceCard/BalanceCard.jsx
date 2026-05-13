@@ -1,17 +1,65 @@
 import './BalanceCard.css'
 
 import { FaUniversity } from 'react-icons/fa'
+import {
+    FaEye,
+    FaEyeSlash
+} from 'react-icons/fa'
 
-export default function BalanceCard({usuario}) {
+import { useEffect, useState } from 'react'
+
+
+export default function BalanceCard({ usuario }) {
+
+    const [mostrarSaldo, setMostrarSaldo] = useState(
+
+        localStorage.getItem('mostrarSaldo') !== 'false'
+    )
+    useEffect(() => {
+
+        localStorage.setItem(
+            'mostrarSaldo',
+            mostrarSaldo
+        )
+
+    }, [mostrarSaldo])
     return (
         <div className="balance-card">
-            
+
             <div className="balance-info">
 
                 <p>Saldo atual</p>
 
-                <h2>R$ {usuario?.saldo}</h2>
+                <div className="balance-value">
 
+                    <p>
+                        {
+                            mostrarSaldo
+                                ? usuario?.saldo?.toLocaleString(
+                                    'pt-BR',
+                                    {
+                                        style: 'currency',
+                                        currency: 'BRL'
+                                    }
+                                )
+                                : '••••••'
+                        }
+                    </p>
+
+                    <button
+                        className="toggle-balance"
+                        onClick={() =>
+                            setMostrarSaldo(prev => !prev)
+                        }
+                    >
+                        {
+                            mostrarSaldo
+                                ? <FaEyeSlash />
+                                : <FaEye />
+                        }
+                    </button>
+
+                </div>
 
             </div>
 
