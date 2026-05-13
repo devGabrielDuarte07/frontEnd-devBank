@@ -6,3 +6,8 @@ export async function buscarUsuario()
     return response.data.dados
 }
 
+export async function criarUsuario(dados)
+{
+    const response = await api.post('/Usuario', dados)
+    return response.data
+}

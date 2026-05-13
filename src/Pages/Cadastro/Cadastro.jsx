@@ -2,34 +2,96 @@ import './Cadastro.css'
 
 import logo from '../../assets/imagens/logoRoxa.png'
 import card from '../../assets/imagens/cartaoDevBank.png'
+
 import { useNavigate } from 'react-router-dom'
-import { FaUser, FaEnvelope, FaLock, FaPhone } from 'react-icons/fa'
+
+import {
+    FaUser,
+    FaEnvelope,
+    FaLock,
+    FaPhone,
+    FaEye,
+    FaEyeSlash
+} from 'react-icons/fa'
+
 import { MdDateRange } from 'react-icons/md'
 
-export default function Register() {
-    const navigate = useNavigate()
-    return (
-        
-        <div className="register-container">
+import { useState } from 'react'
 
-            {/* LADO ESQUERDO */}
+import { criarUsuario } from '../../services/usuarioService'
+
+export default function Register() {
+
+    const navigate = useNavigate()
+
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [cpf, setCpf] = useState('')
+    const [telefone, setTelefone] = useState('')
+    const [senha, setSenha] = useState('')
+    const [confirmarSenha, setConfirmarSenha] = useState('')
+
+    const [mostrarSenha, setMostrarSenha] = useState(false)
+
+    async function cadastrar() {
+
+        try {
+
+            if (senha !== confirmarSenha) {
+
+                alert('As senhas não coincidem')
+                return
+            }
+
+            await criarUsuario({
+
+                nome,
+                cpf,
+                email,
+                telefone,
+                senha
+            })
+
+            alert('Conta criada com sucesso')
+
+            navigate('/')
+
+        } catch (error) {
+
+            console.error(error)
+
+            alert(
+                error.response?.data?.mensagem ||
+                'Erro ao criar conta'
+            )
+        }
+    }
+
+    return (
+
+        <div className="register-container">
 
             <div className="container-esquerdo">
 
                 <div className="left-content">
 
                     <div className="logo">
+
                         <img src={logo} alt="logo" />
+
                         <h1>DevBank</h1>
+
                     </div>
 
                     <div className="left-text">
+
                         <h2>Crie sua conta</h2>
 
                         <p>
                             É rápido, fácil e gratuito.
                             Preencha seus dados para começar.
                         </p>
+
                     </div>
 
                     <img
@@ -42,8 +104,6 @@ export default function Register() {
 
             </div>
 
-            {/* LADO DIREITO */}
-
             <div className="container-direito">
 
                 <div className="register-box">
@@ -51,11 +111,13 @@ export default function Register() {
                     <div className="register-header">
 
                         <div>
+
                             <h1>Cadastre-se</h1>
 
                             <p>
                                 Informe seus dados para criar sua conta
                             </p>
+
                         </div>
 
                         <img src={logo} alt="logo" />
@@ -69,12 +131,18 @@ export default function Register() {
                         <label>Nome completo</label>
 
                         <div className="input-icon">
+
                             <FaUser />
 
                             <input
                                 type="text"
                                 placeholder="Digite seu nome completo"
+                                value={nome}
+                                onChange={e =>
+                                    setNome(e.target.value)
+                                }
                             />
+
                         </div>
 
                     </div>
@@ -86,12 +154,18 @@ export default function Register() {
                         <label>Email</label>
 
                         <div className="input-icon">
+
                             <FaEnvelope />
 
                             <input
                                 type="email"
                                 placeholder="Digite seu email"
+                                value={email}
+                                onChange={e =>
+                                    setEmail(e.target.value)
+                                }
                             />
+
                         </div>
 
                     </div>
@@ -103,47 +177,40 @@ export default function Register() {
                         <label>CPF</label>
 
                         <div className="input-icon">
+
                             <FaUser />
 
                             <input
                                 type="text"
                                 placeholder="000.000.000-00"
+                                value={cpf}
+                                onChange={e =>
+                                    setCpf(e.target.value)
+                                }
                             />
+
                         </div>
 
                     </div>
 
-                    {/* ROW */}
+                    {/* TELEFONE */}
 
-                    <div className="row">
+                    <div className="input-group">
 
-                        <div className="input-group">
+                        <label>Telefone</label>
 
-                            <label>Data de nascimento</label>
+                        <div className="input-icon">
 
-                            <div className="input-icon">
-                                <MdDateRange />
+                            <FaPhone />
 
-                                <input
-                                    type="text"
-                                    placeholder="dd/mm/aaaa"
-                                />
-                            </div>
-
-                        </div>
-
-                        <div className="input-group">
-
-                            <label>Telefone</label>
-
-                            <div className="input-icon">
-                                <FaPhone />
-
-                                <input
-                                    type="text"
-                                    placeholder="(00) 00000-0000"
-                                />
-                            </div>
+                            <input
+                                type="text"
+                                placeholder="(00) 00000-0000"
+                                value={telefone}
+                                onChange={e =>
+                                    setTelefone(e.target.value)
+                                }
+                            />
 
                         </div>
 
@@ -155,13 +222,37 @@ export default function Register() {
 
                         <label>Senha</label>
 
-                        <div className="input-icon">
+                        <div className="password-input input-icon">
+
                             <FaLock />
 
                             <input
-                                type="password"
+                                type={
+                                    mostrarSenha
+                                        ? 'text'
+                                        : 'password'
+                                }
                                 placeholder="Digite sua senha"
+                                value={senha}
+                                onChange={e =>
+                                    setSenha(e.target.value)
+                                }
                             />
+
+                            <button
+                                type="button"
+                                className="toggle-password"
+                                onClick={() =>
+                                    setMostrarSenha(prev => !prev)
+                                }
+                            >
+                                {
+                                    mostrarSenha
+                                        ? <FaEyeSlash />
+                                        : <FaEye />
+                                }
+                            </button>
+
                         </div>
 
                     </div>
@@ -172,13 +263,25 @@ export default function Register() {
 
                         <label>Confirmar senha</label>
 
-                        <div className="input-icon">
+                        <div className="password-input input-icon">
+
                             <FaLock />
 
                             <input
-                                type="password"
+                                type={
+                                    mostrarSenha
+                                        ? 'text'
+                                        : 'password'
+                                }
                                 placeholder="Confirme sua senha"
+                                value={confirmarSenha}
+                                onChange={e =>
+                                    setConfirmarSenha(
+                                        e.target.value
+                                    )
+                                }
                             />
+
                         </div>
 
                     </div>
@@ -188,6 +291,7 @@ export default function Register() {
                     <div className="terms">
 
                         <label>
+
                             <input type="checkbox" />
 
                             Li e aceito os
@@ -201,7 +305,10 @@ export default function Register() {
 
                     {/* BOTÃO */}
 
-                    <button className="register-btn">
+                    <button
+                        className="register-btn"
+                        onClick={cadastrar}
+                    >
                         Criar conta
                     </button>
 
@@ -219,7 +326,10 @@ export default function Register() {
 
                     {/* LOGIN */}
 
-                    <button className="login-btn" onClick={()=> navigate("/")}>
+                    <button
+                        className="login-btn"
+                        onClick={() => navigate("/")}
+                    >
                         Já tenho uma conta?
                         <span> Entrar</span>
                     </button>
