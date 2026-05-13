@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'http://localhost:5059/api'
+    baseURL: 'https://api-devbank.onrender.com'
 })
 
 api.interceptors.request.use(config => {
