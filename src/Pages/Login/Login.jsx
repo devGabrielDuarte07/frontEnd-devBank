@@ -1,6 +1,6 @@
 import './Login.css'
 
-import logoBranca from '../../assets/imagens/LogoBranca.png'
+import logoBranca from '../../assets/imagens/logoBranca.png'
 import logoRoxa from '../../assets/imagens/logoRoxa.png'
 
 import { useState, useEffect } from 'react'
