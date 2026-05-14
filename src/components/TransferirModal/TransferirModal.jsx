@@ -19,6 +19,7 @@ export default function TransferirModal({
 
     const [valor, setValor] =
         useState('')
+    const [loading, setLoading] = useState(false)
 
     async function fazerTransferencia() {
 
@@ -31,6 +32,8 @@ export default function TransferirModal({
         }
 
         try {
+
+            setLoading(true)
 
             await transferir(
                 cpfContaDestino,
@@ -53,6 +56,8 @@ export default function TransferirModal({
             console.error(error)
 
             toast.error(error.response?.data?.mensagem || "Erro ao realizar transferência")
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -89,8 +94,13 @@ export default function TransferirModal({
 
             <button
                 onClick={() => setConfirmar(true)}
+                disabled={loading}
             >
-                Confirmar transferência
+                {
+                    loading
+                        ? 'Transferindo...'
+                        : 'Confirmar transferência'
+                }
             </button>
             {
                 confirmar && (
@@ -113,7 +123,7 @@ export default function TransferirModal({
                         }
 
                         variant="sucess"
-                        
+
                         onConfirm={fazerTransferencia}
 
                         onClose={() =>

@@ -6,41 +6,75 @@ import { pix }
     from '../../../services/contaService'
 
 import toast from 'react-hot-toast'
-import ConfirmModal from '../../../components/ConfirmModal/ConfirmModal'
+
+import ConfirmModal
+    from '../../../components/ConfirmModal/ConfirmModal'
 
 export default function PixModal({
     atualizarDados,
     onClose
 }) {
+
     const [confirmar, setConfirmar] =
         useState(false)
-    const [chave, setChave] = useState('')
 
-    const [valor, setValor] = useState('')
+    const [chave, setChave] =
+        useState('')
+
+    const [valor, setValor] =
+        useState('')
+
+    const [loading, setLoading] =
+        useState(false)
 
     async function fazerPix() {
 
+        if (!chave || !valor) {
+            return toast.error(
+                'Preencha todos os campos'
+            )
+        }
+
+        if (Number(valor) <= 0) {
+            return toast.error(
+                'Valor inválido'
+            )
+        }
+
         try {
+
+            setLoading(true)
 
             await pix(
                 chave,
                 Number(valor)
             )
 
-            toast.success('Pix realizado')
+            toast.success(
+                'Pix realizado'
+            )
 
             atualizarDados()
 
             setChave('')
             setValor('')
+
             setConfirmar(false)
+
             onClose()
 
         } catch (error) {
 
             console.error(error)
 
-            toast.error(error.response?.data?.mensagem)
+            toast.error(
+                error.response?.data?.mensagem ||
+                'Erro ao realizar Pix'
+            )
+
+        } finally {
+
+            setLoading(false)
         }
     }
 
@@ -51,6 +85,7 @@ export default function PixModal({
             <button
                 className="close-btn"
                 onClick={onClose}
+                disabled={loading}
             >
                 ✕
             </button>
@@ -64,6 +99,7 @@ export default function PixModal({
                 onChange={(e) =>
                     setChave(e.target.value)
                 }
+                disabled={loading}
             />
 
             <input
@@ -73,13 +109,22 @@ export default function PixModal({
                 onChange={(e) =>
                     setValor(e.target.value)
                 }
+                disabled={loading}
             />
 
             <button
-                onClick={() => setConfirmar(true)}
+                onClick={() =>
+                    setConfirmar(true)
+                }
+                disabled={loading}
             >
-                Confirmar Pix
+                {
+                    loading
+                        ? 'Enviando Pix...'
+                        : 'Confirmar Pix'
+                }
             </button>
+
             {
                 confirmar && (
 
@@ -89,17 +134,19 @@ export default function PixModal({
 
                         descricao={
                             `Deseja enviar
-                ${Number(valor).toLocaleString(
+                            ${Number(valor).toLocaleString(
                                 'pt-BR',
                                 {
                                     style: 'currency',
                                     currency: 'BRL'
                                 }
                             )}
-                para a chave
-                ${chave}?`
+                            para a chave
+                            ${chave}?`
                         }
-                        variant = 'primary'
+
+                        variant="primary"
+
                         onConfirm={fazerPix}
 
                         onClose={() =>
@@ -110,6 +157,7 @@ export default function PixModal({
 
                 )
             }
+
         </div>
     )
 }

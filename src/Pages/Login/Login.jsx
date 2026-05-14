@@ -19,7 +19,7 @@ import {
 export default function Login() {
 
     const navigate = useNavigate()
-
+    const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [mostrarSenha, setMostrarSenha] = useState(false)
@@ -49,10 +49,11 @@ export default function Login() {
         setDarkMode(prev => !prev)
     }
 
-    async function fazerLogin() {
-
+    async function fazerLogin(e) {
+        
+        e.preventDefault()
         try {
-
+            setLoading(true)
             const data = await login(email, senha)
 
             localStorage.setItem('token', data.token)
@@ -65,6 +66,8 @@ export default function Login() {
                 'Erro ao fazer login:',
                 error.response?.data || error.message
             )
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -194,10 +197,9 @@ export default function Login() {
 
                     </div>
 
-                    <button onClick={fazerLogin} className="login-submit">
-
-                        Entrar
-
+                    <button onClick={fazerLogin} className="login-submit" disabled={loading}>
+                         {loading ? 'Logando...' : 'Entrar'}
+                         
                     </button>
 
                     <div className="divider">

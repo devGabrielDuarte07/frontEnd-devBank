@@ -4,10 +4,11 @@ import './SaqueModal.css'
 
 import { sacar }
     from '../../services/contaService'
+
 import toast from 'react-hot-toast'
 
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
-
+import ConfirmModal
+    from '../../components/ConfirmModal/ConfirmModal'
 
 export default function SaqueModal({
     atualizarDados,
@@ -20,19 +21,40 @@ export default function SaqueModal({
     const [valor, setValor] =
         useState('')
 
+    const [loading, setLoading] =
+        useState(false)
+
     async function fazerSaque() {
 
+        if (!valor) {
+            return toast.error(
+                'Digite um valor'
+            )
+        }
+
+        if (Number(valor) <= 0) {
+            return toast.error(
+                'Valor inválido'
+            )
+        }
+
         try {
+
+            setLoading(true)
 
             await sacar(
                 Number(valor)
             )
 
-            toast.success('Saque realizado')
+            toast.success(
+                'Saque realizado'
+            )
 
             atualizarDados()
 
             setValor('')
+
+            setConfirmar(false)
 
             onClose()
 
@@ -40,7 +62,14 @@ export default function SaqueModal({
 
             console.error(error)
 
-            toast.error(error.response?.data?.mensagem)
+            toast.error(
+                error.response?.data?.mensagem ||
+                'Erro ao realizar saque'
+            )
+
+        } finally {
+
+            setLoading(false)
         }
     }
 
@@ -51,6 +80,7 @@ export default function SaqueModal({
             <button
                 className="close-btn"
                 onClick={onClose}
+                disabled={loading}
             >
                 ✕
             </button>
@@ -64,13 +94,22 @@ export default function SaqueModal({
                 onChange={(e) =>
                     setValor(e.target.value)
                 }
+                disabled={loading}
             />
 
             <button
-                onClick={() => setConfirmar(true)}
+                onClick={() =>
+                    setConfirmar(true)
+                }
+                disabled={loading}
             >
-                Confirmar saque
+                {
+                    loading
+                        ? 'Sacando...'
+                        : 'Confirmar saque'
+                }
             </button>
+
             {
                 confirmar && (
 
@@ -80,7 +119,7 @@ export default function SaqueModal({
 
                         descricao={
                             `Deseja sacar
-                                ${Number(valor).toLocaleString(
+                            ${Number(valor).toLocaleString(
                                 'pt-BR',
                                 {
                                     style: 'currency',
@@ -99,6 +138,7 @@ export default function SaqueModal({
 
                 )
             }
+
         </div>
     )
 }

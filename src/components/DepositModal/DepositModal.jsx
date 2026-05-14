@@ -1,35 +1,60 @@
 import { useState } from 'react'
+
 import './DepositModal.css'
 
 import { depositar }
     from '../../services/contaService'
-    
 
 import toast from 'react-hot-toast'
-import ConfirmModal from '../../components/ConfirmModal/ConfirmModal'
+
+import ConfirmModal
+    from '../../components/ConfirmModal/ConfirmModal'
+
 export default function DepositModal({
     atualizarDados,
     onClose
 }) {
+
     const [confirmar, setConfirmar] =
         useState(false)
+
     const [valor, setValor] =
         useState('')
 
+    const [loading, setLoading] =
+        useState(false)
+
     async function fazerDeposito() {
 
+        if (!valor) {
+            return toast.error(
+                'Digite um valor'
+            )
+        }
+
+        if (Number(valor) <= 0) {
+            return toast.error(
+                'Valor inválido'
+            )
+        }
+
         try {
+
+            setLoading(true)
 
             await depositar(
                 Number(valor)
             )
 
-
-            toast.success('Depósito realizado')
+            toast.success(
+                'Depósito realizado'
+            )
 
             atualizarDados()
 
             setValor('')
+
+            setConfirmar(false)
 
             onClose()
 
@@ -37,7 +62,14 @@ export default function DepositModal({
 
             console.error(error)
 
-            toast.error(error.response?.data?.mensagem || 'Erro ao depositar')
+            toast.error(
+                error.response?.data?.mensagem ||
+                'Erro ao depositar'
+            )
+
+        } finally {
+
+            setLoading(false)
         }
     }
 
@@ -48,6 +80,7 @@ export default function DepositModal({
             <button
                 className="close-btn"
                 onClick={onClose}
+                disabled={loading}
             >
                 ✕
             </button>
@@ -61,13 +94,22 @@ export default function DepositModal({
                 onChange={(e) =>
                     setValor(e.target.value)
                 }
+                disabled={loading}
             />
 
             <button
-                onClick={() => setConfirmar(true)}
+                onClick={() =>
+                    setConfirmar(true)
+                }
+                disabled={loading}
             >
-                Confirmar depósito
+                {
+                    loading
+                        ? 'Depositando...'
+                        : 'Confirmar depósito'
+                }
             </button>
+
             {
                 confirmar && (
 
@@ -77,7 +119,7 @@ export default function DepositModal({
 
                         descricao={
                             `Deseja depositar
-                                ${Number(valor).toLocaleString(
+                            ${Number(valor).toLocaleString(
                                 'pt-BR',
                                 {
                                     style: 'currency',
@@ -96,6 +138,7 @@ export default function DepositModal({
 
                 )
             }
+
         </div>
     )
 }

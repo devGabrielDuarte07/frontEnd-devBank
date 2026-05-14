@@ -33,11 +33,11 @@ export default function Register() {
 
     const [mostrarSenha, setMostrarSenha] = useState(false)
     const [mostrarConfirmarSenha, setMostrarConfirmarSenha] = useState(false)
-
+    const [loading, setLoading] = useState(false)
     async function cadastrar() {
 
         try {
-
+             setLoading(true)
             if (senha !== confirmarSenha) {
 
                 toast.error('As senhas não coincidem')
@@ -71,6 +71,8 @@ export default function Register() {
                 error.response?.data?.mensagem ||
                 'Erro ao criar conta'
             )
+        } finally {
+            setLoading(false)
         }
     }
 
@@ -312,8 +314,9 @@ export default function Register() {
                     <button
                         className="register-btn"
                         onClick={cadastrar}
+                        disabled={loading}
                     >
-                        Criar conta
+                       {loading ? 'Cadastrando...' : 'Criar conta'}
                     </button>
 
                     {/* DIVIDER */}
